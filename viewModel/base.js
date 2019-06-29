@@ -4,20 +4,24 @@ class baseModel {
 
     save(data,cb) {
         var ins = new this.model(data);
-        ins.save(cb);
+        return ins.save(cb);
     }
 
-    find(params,cb) { 
-        this.model.find(params,cb);
+    findOne(params){
+        return  this.model.findOne(params);
+    }
+
+    find(params,cb) {  
+       return  this.model.find(params,cb);
     }
 
     remove(params,cb) {
         
-        this.model.remove(params,cb);
+        return this.model.remove(params,cb);
     }
 
     update(wherestr,updatestr,cb){
-        this.model.update(wherestr,updatestr,cb);
+       return this.model.update(wherestr,updatestr,cb);
     }
 
     resJSON(res,data){

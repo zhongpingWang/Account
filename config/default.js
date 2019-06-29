@@ -1,6 +1,6 @@
 module.exports = {
     port: parseInt(process.env.PORT, 10) || 9003,
-    url: 'mongodb://localhost:27017/iBiography',
+    url: 'mongodb://localhost:27017/SmartForm',
     session: {
         name: 'SID',
         secret: 'secret',
