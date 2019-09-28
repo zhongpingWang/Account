@@ -77,7 +77,7 @@ app.get('/page/**', (req, res) => res.render('index', {
 router(app);
 
 //静态资源
-//app.use('/static', express.static(__dirname + '/static'));
+app.use('/imgs', express.static(__dirname + '/uploads'));
 
 //静态资源路径 导向
 //app.use(express.static(__dirname + '/static'));
