@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 var fs = require('fs')
+var images = require('images')
 
 const multer = require('multer')
 
@@ -112,19 +113,17 @@ router.delete('/', function (req, res, next) {
 })
 
 router.put('/', function (req, res, next) {
-
   var data = {}
 
   for (var key in req.body) {
     data[key] = req.body[key]
   }
 
-  delete data._id;
+  delete data._id
 
   carInfo.update({
     _id: req.body._id
   }, data, function (err, resData) {
-
     var data = resData
 
     if (err) {
@@ -133,11 +132,11 @@ router.put('/', function (req, res, next) {
       data = err
     }
 
-    carInfo.resJSON(res, data);
-
+    carInfo.resJSON(res, data)
   })
-
 })
+
+
 
 router.post('/uploader', upload.array('carlogo', 10), function (req, res) {
   if (!req.session.userInfo || req.session.userInfo == null) {
@@ -161,16 +160,29 @@ router.post('/uploader', upload.array('carlogo', 10), function (req, res) {
       let newName = uuid.v1()
       let originalname = file.originalname
       let index = originalname.lastIndexOf('.')
-      newName += originalname.substring(index)
+      let suffx = originalname.substring(index)
+      let thumPath = newName + '_thum' + suffx
+      newName += suffx
 
+
+      // 文件夹必须存在 否则会报错
       fs.renameSync('./uploads/' + file.filename, './uploads/' + newName); // 这里修改文件名。
+
+      // 拷贝
+      // fs.writeFileSync('./uploads/abc/' + newName, fs.readFileSync('./uploads/' + newName))
+
+      images('./uploads/' + newName)
+        .size(400)
+        .save('./uploads/thum/' + thumPath, {
+          quality: 30
+        });
 
       // 获取文件基本信息
       fileInfo.mimetype = file.mimetype
       fileInfo.originalname = newName
       fileInfo.size = file.size
-      fileInfo.path = '/imgs/' + newName
-
+      fileInfo.path = '/imgs/' + newName 
+      
       fileInfos.push(fileInfo)
     }
 
