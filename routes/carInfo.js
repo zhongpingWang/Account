@@ -173,7 +173,7 @@ router.post('/uploader', upload.array('carlogo', 10), function (req, res) {
 
       images('./uploads/' + newName)
         .size(400)
-        .save('./uploads/thum/' + thumPath, {
+        .save('./uploads/thum/' + newName, {
           quality: 30
         });
 
@@ -181,8 +181,8 @@ router.post('/uploader', upload.array('carlogo', 10), function (req, res) {
       fileInfo.mimetype = file.mimetype
       fileInfo.originalname = newName
       fileInfo.size = file.size
-      fileInfo.path = '/imgs/' + newName 
-      
+      fileInfo.path = newName  
+
       fileInfos.push(fileInfo)
     }
 
