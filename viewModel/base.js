@@ -1,45 +1,48 @@
+
+//viewmodel
 class baseModel {
 
-  save (data, cb) {
+  save(data, cb) {
     var ins = new this.model(data)
 
     if (cb) {
       return ins.save(cb)
-    }else {
+    } else {
       return ins.save()
     }
   }
 
-  findOne (params) {
+  findOne(params) {
     return this.model.findOne(params)
   }
 
-  find (params, cb) {
+  find(params, cb) {
     if (cb) {
       return this.model.find(params, cb)
-    }else {
+    } else {
       return this.model.find(params)
     }
   }
 
-  remove (params, cb) {
+  remove(params, cb) {
     if (cb) {
       return this.model.remove(params, cb)
-    }else {
+    } else {
       return this.model.remove(params)
     }
   }
 
-  update (wherestr, updatestr, cb) {
+  update(wherestr, updatestr, cb) {
     if (cb) {
       return this.model.update(wherestr, updatestr, cb)
-    }   else {
+    } else {
       return this.model.update(wherestr, updatestr)
     }
   }
 
-  resJSON (res, data) {
-    res.writeHead(200, {'Content-Type': 'application/json','charset': 'utf-8'})
+  resJSON(res, data) {
+
+    res.writeHead(200, { 'Content-Type': 'application/json', 'charset': 'utf-8' })
 
     var resData = {
       code: 0,
@@ -50,8 +53,9 @@ class baseModel {
     res.end()
   }
 
-  resError (res, msg) {
-    res.writeHead(200, {'Content-Type': 'application/json','charset': 'utf-8'})
+  resError(res, msg) {
+
+    res.writeHead(200, { 'Content-Type': 'application/json', 'charset': 'utf-8' })
 
     var resData = {
       code: -1,

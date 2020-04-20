@@ -1,9 +1,9 @@
 module.exports = {
-    port: parseInt(process.env.PORT, 10) || 9095,
-    url: 'mongodb://localhost:27017/iCar',
+    port: 9090,
+    url: 'mongodb://localhost:27017/Account',
     session: {
-        name: 'SID',
-        secret: 'secret',
+        name: '.sid',
+        secret: '.secret',
         cookie: {
             httpOnly: true,
             secure: false,

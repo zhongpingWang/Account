@@ -69,7 +69,7 @@ app.get('/', (req, res) =>{
 
 
 //页面
-app.get('/page/**', (req, res) => res.render('index', {
+app.get('/account/page/**', (req, res) => res.render('index', {
     title: ""
 }));
 
@@ -77,7 +77,7 @@ app.get('/page/**', (req, res) => res.render('index', {
 router(app);
 
 //静态资源
-app.use('/imgs', express.static(__dirname + '/uploads'));
+app.use('/imgs', express.static(__dirname + '/static'));
 
 //静态资源路径 导向
 //app.use(express.static(__dirname + '/static'));

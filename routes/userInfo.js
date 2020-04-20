@@ -60,19 +60,7 @@ router.get('/info', function (req, res) {
 
 })
 
-// 登录
-router.post('/login', function (req, res) {
-  var params = req.body
-
-  userInfo.findOne({account: params.account,passWord: params.passWord}).then(function (doc) {
-    if (doc == null) {
-      userInfo.resError(res, '用户名或密码错误')
-    }else {
-      req.session.userInfo = doc
-      userInfo.resJSON(res, doc)
-    }
-  })
-})
+ 
 
 // 注册用户
 router.post('/register', function (req, res, next) {
@@ -163,6 +151,7 @@ router.put('/update', function (req, res, next) {
 })
 
 router.post('/login', function (req, res, next) {
+  
   var params = {
     _id: req.body._id
   }
@@ -184,13 +173,8 @@ router.post('/login', function (req, res, next) {
       }
     }
   })
-})
-
-// 退出
-router.get('/loginout', function (req, res) {
-  req.session.userInfo = null; // 删除session
-  userInfo.resJSON(res, {data: '退出成功'})
-})
+}) 
+ 
 
 // 退出
 router.get('/me', function (req, res) {
